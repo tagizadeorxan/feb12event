@@ -419,6 +419,126 @@
   height: 300px;
 }
 
+/* Timeline (for My Journey slide) */
+.timeline{
+  margin-top: 18px;
+  display:grid;
+  gap:12px;
+  max-width: 66ch;
+}
+
+.tItem{
+  display:grid;
+  grid-template-columns: 18px 1fr;
+  gap:12px;
+  align-items:flex-start;
+}
+
+.tLine{
+  position:relative;
+  width:18px;
+  display:flex;
+  justify-content:center;
+}
+
+.tLine::before{
+  content:"";
+  position:absolute;
+  top:0; bottom:0;
+  width:2px;
+  background: linear-gradient(180deg, rgba(72,245,255,.55), rgba(180,92,255,.45), rgba(59,255,143,.35));
+  opacity:.55;
+  border-radius:999px;
+}
+
+/* Professional training list */
+.trainingList{
+  margin-top: 18px;
+  display:grid;
+  gap:12px;
+  max-width: 70ch;
+}
+
+.trainingItem{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  padding: 10px 14px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.05);
+}
+
+.trainingLogo{
+  width:32px;
+  height:32px;
+  object-fit:contain;
+  flex-shrink:0;
+}
+
+.trainingText{
+  font-size:14px;
+  line-height:1.4;
+}
+
+.trainingText strong{
+  display:block;
+  font-weight:700;
+  margin-bottom:4px;
+}
+
+.trainingMeta{
+  font-size:12px;
+  color: var(--muted);
+}
+
+
+.tDot{
+  width:12px; height:12px;
+  border-radius:999px;
+  background: rgba(72,245,255,.85);
+  box-shadow: 0 0 0 3px rgba(72,245,255,.14), 0 0 22px rgba(72,245,255,.22);
+  position:relative;
+  margin-top: 6px;
+  z-index: 1;
+}
+
+.tDot.purple{
+  background: rgba(180,92,255,.85);
+  box-shadow: 0 0 0 3px rgba(180,92,255,.14), 0 0 22px rgba(180,92,255,.20);
+}
+.tDot.green{
+  background: rgba(59,255,143,.85);
+  box-shadow: 0 0 0 3px rgba(59,255,143,.14), 0 0 22px rgba(59,255,143,.18);
+}
+
+.tContent{
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.05);
+}
+
+.tDate{
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.tTitle{
+  margin-top: 6px;
+  font-size: 16px;
+  font-weight: 720;
+}
+
+.tDesc{
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+
     /* Hint overlay */
     .hint{
       position:fixed;
@@ -740,6 +860,42 @@
               and the human side of building products.
             </p>
        
+            <!-- Career timeline -->
+<div class="timeline" aria-label="Career timeline at Xsolla">
+  <div class="tItem">
+    <div class="tLine"><span class="tDot"></span></div>
+    <div class="tContent">
+      <div class="tDate">Jan 2025</div>
+      <div class="tTitle">Joined Xsolla — Frontend Developer</div>
+      <div class="tDesc">
+        Focused on building product UI, scaling components, and improving performance & developer experience.
+      </div>
+    </div>
+  </div>
+
+  <div class="tItem">
+    <div class="tLine"><span class="tDot purple"></span></div>
+    <div class="tContent">
+      <div class="tDate">Mid-July 2025</div>
+      <div class="tTitle">Acting Tech Lead (role replacement)</div>
+      <div class="tDesc">
+        Took ownership of technical decisions, coordination, and delivery — aligning the team and guiding execution.
+      </div>
+    </div>
+  </div>
+
+  <div class="tItem">
+    <div class="tLine"><span class="tDot green"></span></div>
+    <div class="tContent">
+      <div class="tDate">Jan 2026</div>
+      <div class="tTitle">Official Tech Lead</div>
+      <div class="tDesc">
+        Leading the Blueprints team: architecture, quality, mentorship, and cross-geographic collaboration.
+      </div>
+    </div>
+  </div>
+</div>
+
 
             <div class="chips">
               <span class="chip neon">Tech Lead</span>
@@ -788,11 +944,7 @@
               Moving from “shipping UI” to building systems: product thinking, scalability, reliability,
               and taking full ownership of outcomes.
             </p>
-            <p class="detail">
-              In this section I go deeper than a title or bullet point. I explain context, real examples, and lessons learned,
-              so the audience understands not only *what* happened, but *why* it mattered and *how* it influenced my growth
-              as an engineer and later as a Tech Lead working in a global Xsolla environment.
-            </p>
+
             <div class="chips">
               <span class="chip neon">Ownership</span>
               <span class="chip purple">System thinking</span>
@@ -837,11 +989,7 @@
               First as an acting Tech Lead, then officially stepping into the role.
               The biggest change: decisions, communication, and responsibility over direction — not just code.
             </p>
-            <p class="detail">
-              In this section I go deeper than a title or bullet point. I explain context, real examples, and lessons learned,
-              so the audience understands not only *what* happened, but *why* it mattered and *how* it influenced my growth
-              as an engineer and later as a Tech Lead working in a global Xsolla environment.
-            </p>
+
             <div class="chips">
               <span class="chip neon">Leadership</span>
               <span class="chip purple">Decision-making</span>
@@ -886,11 +1034,7 @@
               As Tech Lead in the Blueprints team, we support Xsolla partner game projects by enabling creation,
               modification, and optimization of virtual products — through powerful, visual, canvas-based tooling.
             </p>
-            <p class="detail">
-              In this section I go deeper than a title or bullet point. I explain context, real examples, and lessons learned,
-              so the audience understands not only *what* happened, but *why* it mattered and *how* it influenced my growth
-              as an engineer and later as a Tech Lead working in a global Xsolla environment.
-            </p>
+
             <div class="chips">
               <span class="chip neon">Blueprints</span>
               <span class="chip purple">Canvas UI</span>
@@ -935,11 +1079,46 @@
               Continuous learning is part of the job: deepening technical expertise, improving communication,
               and strengthening leadership skills.
             </p>
-            <p class="detail">
-              In this section I go deeper than a title or bullet point. I explain context, real examples, and lessons learned,
-              so the audience understands not only *what* happened, but *why* it mattered and *how* it influenced my growth
-              as an engineer and later as a Tech Lead working in a global Xsolla environment.
-            </p>
+
+            <!-- Professional trainings -->
+<div class="trainingList" aria-label="Professional trainings and certifications">
+
+  <div class="trainingItem">
+    <img src="./mit.png" alt="MIT logo" class="trainingLogo" />
+    <div class="trainingText">
+      <strong>AI and Machine Learning: Building Data Science Solutions</strong>
+      <div class="trainingMeta">MIT — Professional Program</div>
+    </div>
+  </div>
+
+  <div class="trainingItem">
+    <img src="./ada.png" alt="ADA University logo" class="trainingLogo" />
+    <div class="trainingText">
+      <strong>Frontend Development Intensive Bootcamp (480 hours)</strong>
+      <div class="trainingMeta">ADA University • Bootcamp by Pasha Holding</div>
+    </div>
+  </div>
+
+
+  <div class="trainingItem">
+    <img src="./orient.png" alt="Orient ITM logo" class="trainingLogo" />
+    <div class="trainingText">
+      <strong>Java Course Certificate</strong>
+      <div class="trainingMeta">Orient ITM • 6 months</div>
+    </div>
+  </div>
+
+  <div class="trainingItem">
+    <img src="./geekle.png" alt="Geekle logo" class="trainingLogo" />
+    <div class="trainingText">
+      <strong>React.js Certificate</strong>
+      <div class="trainingMeta">Geekle</div>
+    </div>
+  </div>
+
+</div>
+
+
             <div class="chips">
               <span class="chip neon">Tech skills</span>
               <span class="chip purple">Leadership</span>
@@ -984,11 +1163,16 @@
               Working across time zones means we win by clarity: written communication, predictable rituals,
               and strong ownership. Management is about alignment — not micromanagement.
             </p>
-            <p class="detail">
-              In this section I go deeper than a title or bullet point. I explain context, real examples, and lessons learned,
-              so the audience understands not only *what* happened, but *why* it mattered and *how* it influenced my growth
-              as an engineer and later as a Tech Lead working in a global Xsolla environment.
-            </p>
+    
+            <!-- Cross-geographic teamwork image -->
+<div >
+  <div >
+    <img style="width: 700px; height: 300px;" src="./global_team.jpeg" alt="Cross-geographic team collaboration" />
+  </div>
+</div>
+
+
+
             <div class="chips">
               <span class="chip neon">Time zones</span>
               <span class="chip purple">Async first</span>
@@ -1033,11 +1217,23 @@
               A trip that combined work and team bonding: building stronger relationships, aligning on direction,
               and enjoying sports and fun together outside of meetings.
             </p>
-            <p class="detail">
-              In this section I go deeper than a title or bullet point. I explain context, real examples, and lessons learned,
-              so the audience understands not only *what* happened, but *why* it mattered and *how* it influenced my growth
-              as an engineer and later as a Tech Lead working in a global Xsolla environment.
-            </p>
+            <!-- Trip to Kuala Lumpur images -->
+<div class="imageBlock" aria-label="Trip to Kuala Lumpur">
+  <div class="imageLarge">
+    <img src="./kl1.jpeg" alt="Work sessions in Kuala Lumpur" />
+  </div>
+  <div class="imageLarge">
+    <img src="./kl2.jpeg" alt="Team collaboration in KL office" />
+  </div>
+  <div class="imageLarge">
+    <img src="./kl3.jpeg" alt="Sports activity with team in Kuala Lumpur" />
+  </div>
+  <div class="imageLarge">
+    <img src="./kl4.jpeg" alt="Team fun and city moments in Kuala Lumpur" />
+  </div>
+</div>
+<br/>
+
             <div class="chips">
               <span class="chip neon">Work</span>
               <span class="chip purple">Sport</span>
@@ -1082,11 +1278,22 @@
               When colleagues visit Baku, it turns remote collaboration into real connection.
               Knowledge sharing becomes faster, culture becomes closer — and the team feels truly global.
             </p>
-            <p class="detail">
-              In this section I go deeper than a title or bullet point. I explain context, real examples, and lessons learned,
-              so the audience understands not only *what* happened, but *why* it mattered and *how* it influenced my growth
-              as an engineer and later as a Tech Lead working in a global Xsolla environment.
-            </p>
+       <!-- Trip to Kuala Lumpur images -->
+<div class="imageBlock" aria-label="Trip to Kuala Lumpur">
+  <div class="imageLarge">
+    <img src="./expats1.jpeg" alt="Work sessions in Kuala Lumpur" />
+  </div>
+  <div class="imageLarge">
+    <img src="./expats2.jpeg" alt="Team collaboration in KL office" />
+  </div>
+  <div class="imageLarge">
+    <img src="./expats3.jpeg" alt="Sports activity with team in Kuala Lumpur" />
+  </div>
+  <div class="imageLarge">
+    <img src="./expats4.jpeg" alt="Team fun and city moments in Kuala Lumpur" />
+  </div>
+</div>
+
             <div class="chips">
               <span class="chip neon">Moin</span>
               <span class="chip purple">Kiko</span>
@@ -1131,11 +1338,22 @@
               Life outside work matters. Football keeps the team competitive in a healthy way, karting brings fun,
               and singing/musical moments keep the culture warm and human.
             </p>
-            <p class="detail">
-              In this section I go deeper than a title or bullet point. I explain context, real examples, and lessons learned,
-              so the audience understands not only *what* happened, but *why* it mattered and *how* it influenced my growth
-              as an engineer and later as a Tech Lead working in a global Xsolla environment.
-            </p>
+
+            <div class="imageBlock" aria-label="Trip to Kuala Lumpur">
+  <div class="imageLarge">
+    <img src="./act1.jpeg" alt="Work sessions in Kuala Lumpur" />
+  </div>
+  <div class="imageLarge">
+    <img src="./act2.jpeg" alt="Team collaboration in KL office" />
+  </div>
+  <div class="imageLarge">
+    <img src="./act3.jpeg" alt="Sports activity with team in Kuala Lumpur" />
+  </div>
+  <div class="imageLarge">
+    <img src="./act4.jpeg" alt="Team fun and city moments in Kuala Lumpur" />
+  </div>
+</div>
+  
             <div class="chips">
               <span class="chip neon">Football</span>
               <span class="chip purple">Karting</span>
@@ -1180,11 +1398,7 @@
               From Asia to the USA — exposure to different perspectives, higher standards, and faster growth.
               And yes: working in an Azerbaijani–English environment strengthens communication muscles daily.
             </p>
-            <p class="detail">
-              In this section I go deeper than a title or bullet point. I explain context, real examples, and lessons learned,
-              so the audience understands not only *what* happened, but *why* it mattered and *how* it influenced my growth
-              as an engineer and later as a Tech Lead working in a global Xsolla environment.
-            </p>
+      
             <div class="chips">
               <span class="chip neon">Asia → USA</span>
               <span class="chip purple">Azeri + English</span>
