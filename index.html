@@ -1641,14 +1641,21 @@
     prevBtn.addEventListener('click', prev);
     nextBtn.addEventListener('click', next);
 
-    window.addEventListener('keydown', (e) => {
-      const k = e.key.toLowerCase();
-      if (k === 'arrowright' || k === ' ' || k === 'pagedown') { e.preventDefault(); next(); }
-      if (k === 'arrowleft' || k === 'pageup') { e.preventDefault(); prev(); }
-      if (k === 'home') { e.preventDefault(); setActive(0); }
-      if (k === 'end') { e.preventDefault(); setActive(slideEls.length - 1); }
-      if (k === 'f') { e.preventDefault(); toggleFullscreen(); }
-    });
+window.addEventListener('keydown', (e) => {
+  const k = e.key.toLowerCase();
+  if (k === 'arrowright' || k === 'pagedown') {
+    e.preventDefault();
+    next();
+  }
+  if (k === 'arrowleft' || k === 'pageup') {
+    e.preventDefault();
+    prev();
+  }
+  if (k === 'home') { e.preventDefault(); setActive(0); }
+  if (k === 'end') { e.preventDefault(); setActive(slideEls.length - 1); }
+  if (k === 'f') { e.preventDefault(); toggleFullscreen(); }
+});
+
 
     // Touch swipe
     let touchStartX = 0;
@@ -1729,6 +1736,7 @@ if (startVideoBtn) {
 
 // Space on first slide => start
 window.addEventListener('keydown', (e) => {
+     if (e.code !== 'Space') return;
   if (idx !== 0) return; // only on intro slide
   if (e.key === ' ') {
     e.preventDefault();
