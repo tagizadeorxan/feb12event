@@ -91,7 +91,7 @@
       backdrop-filter: blur(8px);
     }
     .logoImg{
-      width:22px; height:22px; object-fit:contain;
+      width:62px; height:62px; object-fit:contain;
       filter: drop-shadow(0 0 8px rgba(72,245,255,.25));
     }
     .brand h1{font-size:14px; letter-spacing:.18em; text-transform:uppercase; margin:0; color:var(--fg)}
@@ -353,6 +353,66 @@
   transform: translateY(-2px);
 }
 
+/* Intro video */
+.videoWrap{
+  margin-top: 18px;
+  border-radius: 18px;
+  overflow:hidden;
+  background: rgba(255,255,255,.04);
+}
+
+.videoWrap video{
+  width: 100%;
+  height: auto;
+  display:block;
+}
+.videoHint{
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: var(--mono);
+  letter-spacing: .08em;
+}
+
+/* Intro video click-to-start overlay */
+.videoWrap{ position:relative; }
+
+.videoOverlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: radial-gradient(700px 380px at 50% 50%, rgba(0,0,0,.35), rgba(0,0,0,.75));
+  backdrop-filter: blur(6px);
+}
+
+.videoStartBtn{
+  border: 1px solid rgba(72,245,255,.55);
+  background: linear-gradient(180deg, rgba(18,26,44,.75), rgba(18,26,44,.35));
+  color: var(--fg);
+  padding: 14px 18px;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 0 18px 60px rgba(0,0,0,.55);
+  font-size: 14px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+  user-select:none;
+}
+.videoStartBtn:hover{ transform: translateY(-1px); }
+.videoStartBtn .kbd{
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 3px 6px;
+  border-radius: 9px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+  color: var(--muted);
+}
+
+
 
 .logoTile{
   width: 90px;
@@ -593,7 +653,7 @@
   <div class="app" role="application" aria-label="Futuristic Slides App">
     <header>
       <div class="brand" title="Futuristic Slides">
-        <div class="logoWrap" title="Xsolla"><img class="logoImg" alt="Xsolla logo" src="./xsolla_logo.jpg" /></div>
+       <img class="logoImg" alt="Xsolla logo" src="./XsollaLogo_cyan.png" />
         <div>
           <h1>Orkhan Taghizade</h1>
         </div>
@@ -615,6 +675,57 @@
     <main class="stage" id="stage">
       <div class="scanline" aria-hidden="true"></div>
       <div class="slides" id="slides">
+
+<!-- 01 — Intro Video -->
+<section class="slide active" data-title="Intro Video">
+  <div class="left">
+    <h2><span class="glitch" data-text="Xsolla">Xsolla</span> Intro</h2>
+    <p>
+      A short intro video before we start — then we’ll jump into my journey at Xsolla and engineering leadership.
+    </p>
+
+<div class="videoWrap">
+  <video id="introVideo" autoplay muted playsinline preload="auto">
+    <source src="./xsolla_intro.mp4" type="video/mp4" />
+  </video>
+
+  <div class="videoOverlay" id="videoOverlay">
+    <button class="videoStartBtn" id="startVideoBtn" type="button">
+      ▶ Start with sound + fullscreen
+      <span class="kbd">Click</span>
+      <span class="kbd">Space</span>
+    </button>
+  </div>
+</div>
+
+
+    <div class="videoHint">Tip: press <b>Space</b> / <b>→</b> to skip • video auto-continues to next slide</div>
+  </div>
+
+  <div class="right">
+    <div class="card">
+      <div class="cardInner">
+        <div class="metric">
+          <div>
+            <div class="k">Next</div>
+            <div class="v">My Journey at Xsolla</div>
+          </div>
+          <div class="pill hot">Start</div>
+        </div>
+        <div class="metric">
+          <div>
+            <div class="k">Format</div>
+            <div class="v">Video → Slides</div>
+          </div>
+          <div class="pill ok">Flow</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
 
                 <!-- 02 -->
         <section class="slide" data-title="Background">
@@ -1587,7 +1698,76 @@
     fsBtn.addEventListener('click', toggleFullscreen);
 
     // Initial state
-    setActive(0);
+    setActive(0);   
+// ================================
+// Intro video: sound + fullscreen (requires user gesture)
+// ================================
+const introVideo = document.getElementById('introVideo');
+const videoOverlay = document.getElementById('videoOverlay');
+const startVideoBtn = document.getElementById('startVideoBtn');
+
+async function startIntroVideoWithSoundAndFullscreen(){
+  if (!introVideo) return;
+
+  // Hide overlay immediately
+  if (videoOverlay) videoOverlay.style.display = 'none';
+
+  // Enable sound
+  introVideo.muted = false;
+  introVideo.volume = 1;
+
+  // Try fullscreen (allowed ONLY from user gesture)
+  try {
+    if (introVideo.requestFullscreen) await introVideo.requestFullscreen();
+    else if (introVideo.webkitRequestFullscreen) introVideo.webkitRequestFullscreen();
+  } catch (e) {
+    // If blocked, just continue playing inline (still fine)
+  }
+
+  // Play
+  try { await introVideo.play(); } catch {}
+}
+
+// Pause video behind overlay on load (clean)
+if (introVideo) {
+  try { introVideo.pause(); introVideo.currentTime = 0; } catch {}
+}
+
+// Click button => start
+if (startVideoBtn) {
+  startVideoBtn.addEventListener('click', startIntroVideoWithSoundAndFullscreen);
+}
+
+// Space on first slide => start
+window.addEventListener('keydown', (e) => {
+  if (idx !== 0) return; // only on intro slide
+  if (e.key === ' ') {
+    e.preventDefault();
+    startIntroVideoWithSoundAndFullscreen();
+  }
+});
+
+// When video ends => exit fullscreen + next slide
+if (introVideo) {
+  introVideo.addEventListener('ended', () => {
+    if (document.fullscreenElement) {
+      document.exitFullscreen().catch(() => {});
+    }
+    next();
+  });
+}
+
+// If user skips away from intro slide => stop and reset
+const __setActive = setActive;
+setActive = function(nextIndex){
+  if (introVideo && idx === 0 && nextIndex !== 0) {
+    try { introVideo.pause(); introVideo.currentTime = 0; } catch {}
+    if (videoOverlay) videoOverlay.style.display = '';
+    if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+  }
+  __setActive(nextIndex);
+};
+
 
     // --- Particle FX (subtle, performant) ---
     const canvas = document.getElementById('fx');
@@ -1679,6 +1859,8 @@
       requestAnimationFrame(draw);
     }
     draw();
+
+    
   </script>
 </body>
 </html>
